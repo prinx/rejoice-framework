@@ -1,4 +1,5 @@
 <?php
+
 namespace Prinx\Rejoice\Console\Commands;
 
 use Prinx\Config;
@@ -87,7 +88,7 @@ class FrameworkCommand extends SmileCommand
 
     public function baseMenuPath()
     {
-        return $this->baseMenuFolder() . Os::slash() . 'Menu.php';
+        return $this->baseMenuFolder().Os::slash().'Menu.php';
     }
 
     public function baseMenuPathRelativeToApp()

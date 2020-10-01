@@ -13,12 +13,11 @@ namespace Prinx\Rejoice\Session;
 
 use Prinx\Rejoice\Foundation\Database;
 use Prinx\Rejoice\Foundation\Kernel;
-use Prinx\Rejoice\Session\Session;
 
-require_once __DIR__ . '/../../constants.php';
+require_once __DIR__.'/../../constants.php';
 
 /**
- * Handle the USSD Session: save and retrieve the session data from the database
+ * Handle the USSD Session: save and retrieve the session data from the database.
  *
  * @author Prince Dorcis <princedorcis@gmail.com>
  */
@@ -32,7 +31,7 @@ class DatabaseSession extends Session implements SessionInterface
     {
         parent::__construct($app);
 
-        $this->tableName = strtolower($app->id()) . $this->tableNameSuffix;
+        $this->tableName = strtolower($app->id()).$this->tableNameSuffix;
 
         $this->loadDB();
 
@@ -123,7 +122,7 @@ class DatabaseSession extends Session implements SessionInterface
 
         $req->execute([
             'session_id' => $this->id,
-            'msisdn' => $this->msisdn,
+            'msisdn'     => $this->msisdn,
         ]);
 
         return $req->closeCursor();
@@ -160,8 +159,8 @@ class DatabaseSession extends Session implements SessionInterface
         $result = $this->db->prepare($sql);
         $result->execute([
             'session_data' => json_encode($data),
-            'msisdn' => $this->msisdn,
-            'session_id' => $this->id,
+            'msisdn'       => $this->msisdn,
+            'session_id'   => $this->id,
         ]);
 
         return $result->closeCursor();
@@ -175,7 +174,7 @@ class DatabaseSession extends Session implements SessionInterface
 
         $result->execute([
             'session_data' => json_encode($data),
-            'msisdn' => $this->msisdn,
+            'msisdn'       => $this->msisdn,
         ]);
 
         return $result->closeCursor();

@@ -14,7 +14,7 @@ namespace Prinx\Rejoice\Utils;
 use Prinx\Rejoice\Foundation\Kernel;
 
 /**
- * Handles SMS related actions
+ * Handles SMS related actions.
  *
  * @author Prince Dorcis <princedorcis@gmail.com>
  */
@@ -23,7 +23,7 @@ class SmsService
     protected $app;
 
     /**
-     * SMS payload. Consists of the message to send, the sender name and the recipient number
+     * SMS payload. Consists of the message to send, the sender name and the recipient number.
      *
      * @var array
      */
@@ -84,7 +84,7 @@ class SmsService
         curl_close($curlHandle);
 
         return [
-            'data' => $result,
+            'data'  => $result,
             'error' => $err,
         ];
     }

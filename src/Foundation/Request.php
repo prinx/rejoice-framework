@@ -14,9 +14,10 @@ namespace Prinx\Rejoice\Foundation;
 use Prinx\Str;
 
 /**
- * Handles the request to the framework
+ * Handles the request to the framework.
  *
  * @author Prince Dorcis <princedorcis@gmail.com>
+ *
  * @todo Replace this request class by \Symfony\Component\HttpFoundation
  */
 class Request
@@ -68,14 +69,15 @@ class Request
     }
 
     /**
-     * Returns a request POST parameter
+     * Returns a request POST parameter.
      *
      * If the parameter was not found and the default value is returned
      *
      * If no parameter has been passed, the array of POST parameters is returned
      *
      * @param string $key
-     * @param mixed $default
+     * @param mixed  $default
+     *
      * @return mixed
      */
     public function input($key = null, $default = null)
@@ -84,14 +86,15 @@ class Request
     }
 
     /**
-     * Returns a request GET parameter
+     * Returns a request GET parameter.
      *
      * If the parameter was not found and the default value is returned
      *
      * If no parameter has been passed, the array of GET parameters is returned
      *
      * @param string $key
-     * @param mixed $default
+     * @param mixed  $default
+     *
      * @return mixed
      */
     public function query($key = null, $default = null)
@@ -108,7 +111,7 @@ class Request
         }
 
         if (!isset($param[$key])) {
-            throw new \Exception('Undefined request input `' . $key . '`');
+            throw new \Exception('Undefined request input `'.$key.'`');
         }
 
         return $key ? $param[$key] : $default;
@@ -116,10 +119,11 @@ class Request
 
     /**
      * Changes the value of a request parameter or enforces a new parameter
-     * into the input parameter bag
+     * into the input parameter bag.
      *
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
+     *
      * @return void
      */
     public function forceInput($name, $value)

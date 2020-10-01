@@ -12,12 +12,11 @@
 namespace Prinx\Rejoice\Session;
 
 use Prinx\Rejoice\Foundation\Kernel;
-use Prinx\Rejoice\Session\Session;
 
-require_once __DIR__ . '/../../constants.php';
+require_once __DIR__.'/../../constants.php';
 
 /**
- * Handles file session storage
+ * Handles file session storage.
  *
  * @author Prince Dorcis <princedorcis@gmail.com>
  */
@@ -42,7 +41,7 @@ class FileSession extends Session implements SessionInterface
             mkdir($app->path('session_root_dir'));
         }
 
-        return $app->path('session_root_dir') . $filename;
+        return $app->path('session_root_dir').$filename;
     }
 
     public function delete()

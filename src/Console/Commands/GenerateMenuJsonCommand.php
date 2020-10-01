@@ -1,4 +1,5 @@
 <?php
+
 namespace Prinx\Rejoice\Console\Commands;
 
 use Prinx\Os;
@@ -24,14 +25,15 @@ class GenerateMenuJsonCommand extends FrameworkCommand
     {
         $path = $this->path('menu_resource_dir');
         $addPath = $this->getOption('path');
-        $path .= $addPath ? $addPath . '/' : '';
+        $path .= $addPath ? $addPath.'/' : '';
 
         $menusDir = realpath($path);
-        $menusPath = Os::toPathStyle($menusDir . '/menus.php');
-        $jsonPath = Os::toPathStyle($menusDir . '/menus.json');
+        $menusPath = Os::toPathStyle($menusDir.'/menus.php');
+        $jsonPath = Os::toPathStyle($menusDir.'/menus.json');
 
         if (!file_exists($menusPath)) {
-            $this->writeln('Menus to generate not found at ' . $menusPath);
+            $this->writeln('Menus to generate not found at '.$menusPath);
+
             return SmileCommand::FAILURE;
         }
 
@@ -50,9 +52,10 @@ class GenerateMenuJsonCommand extends FrameworkCommand
             ));
 
             if (false !== $created) {
-                $this->writeln('<info>JSON generated successfully in ' . $jsonPath . '</info>');
+                $this->writeln('<info>JSON generated successfully in '.$jsonPath.'</info>');
             } else {
-                $this->writeln('<fg=red>Error when generating the json file at ' . $jsonPath . '</>');
+                $this->writeln('<fg=red>Error when generating the json file at '.$jsonPath.'</>');
+
                 return SmileCommand::FAILURE;
             }
         } else {

@@ -15,13 +15,12 @@ use Prinx\Rejoice\Foundation\PathConfig;
 use Symfony\Component\Console\Application as SymfonyConsoleApp;
 
 /**
- * Create an instance instance of the application
+ * Create an instance instance of the application.
  *
  * @author Prince Dorcis <princedorcis@gmail.com>
  */
 class Application
 {
-
     public function run()
     {
         $app = new SymfonyConsoleApp('Rejoice Console', 'v1.0.0');
@@ -49,5 +48,4 @@ class Application
 
         return $commands = array_replace($commands, $frameworkCommands);
     }
-
 }

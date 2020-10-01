@@ -17,7 +17,7 @@ use Prinx\Rejoice\Foundation\Kernel;
 use Prinx\Str;
 
 /**
- * Provides shortcuts to app methods and properties for the user App
+ * Provides shortcuts to app methods and properties for the user App.
  *
  * @author Prince Dorcis <princedorcis@gmail.com>
  *
@@ -63,24 +63,24 @@ use Prinx\Str;
  * @ method mixed onPaginateBack(UserResponse $userPreviousResponses)
  * Runs when when user moving back in on a paginable menu
  */
-class BaseMenu/* implements \ArrayAccess */
+class BaseMenu /* implements \ArrayAccess */
 {
     /**
-     * The instance of the application
+     * The instance of the application.
      *
      * @var Kernel
      */
     protected $app;
 
     /**
-     * The name of this menu
+     * The name of this menu.
      *
      * @var string
      */
     protected $name;
 
     /**
-     * The instance of the logger on this menu
+     * The instance of the logger on this menu.
      *
      * @var Log
      */
@@ -96,6 +96,7 @@ class BaseMenu/* implements \ArrayAccess */
      * the script.
      *
      * @param string $msg
+     *
      * @return void
      */
     public function softEnd($msg)
@@ -106,7 +107,7 @@ class BaseMenu/* implements \ArrayAccess */
             $this->app->config('menu.cancel_message')
         ) {
             $sep = $this->app->config('menu.seperator_menu_string_and_cancel_message');
-            $temp = $msg . $sep . $this->app->config('menu.cancel_message');
+            $temp = $msg.$sep.$this->app->config('menu.cancel_message');
 
             $msg = $this->willOverflowWith($temp) ? $msg : $temp;
         }
@@ -119,6 +120,7 @@ class BaseMenu/* implements \ArrayAccess */
      * the script.
      *
      * @param string $msg
+     *
      * @return void
      */
     public function respond($msg)
@@ -131,6 +133,7 @@ class BaseMenu/* implements \ArrayAccess */
      * the script.
      *
      * @param string $msg
+     *
      * @return void
      */
     public function respondAndContinue($msg)
@@ -143,6 +146,7 @@ class BaseMenu/* implements \ArrayAccess */
      * script.
      *
      * @param string $msg
+     *
      * @return void
      */
     public function hardEnd($msg)
@@ -155,6 +159,7 @@ class BaseMenu/* implements \ArrayAccess */
      * script.
      *
      * @param string $msg
+     *
      * @return void
      */
     public function respondAndExit($msg)
@@ -167,6 +172,7 @@ class BaseMenu/* implements \ArrayAccess */
      * script.
      *
      * @param string $msg
+     *
      * @return void
      */
     public function terminate($msg)
@@ -175,7 +181,7 @@ class BaseMenu/* implements \ArrayAccess */
     }
 
     /**
-     * Returns the phone number of the user
+     * Returns the phone number of the user.
      *
      * @return string
      */
@@ -186,11 +192,13 @@ class BaseMenu/* implements \ArrayAccess */
 
     /**
      * Log a message to the default log system
-     * (storage/logs/{date}/{name_of_this_menu}.log)
+     * (storage/logs/{date}/{name_of_this_menu}.log).
      *
      * @param string|array $data
-     * @return void
+     *
      * @throws \UnexpectedValueException If the level passed is unknown
+     *
+     * @return void
      */
     public function log($data, $level = 'info')
     {
@@ -202,28 +210,28 @@ class BaseMenu/* implements \ArrayAccess */
     }
 
     /**
-     * Returns the default logger of the framework
+     * Returns the default logger of the framework.
      *
      * @return Log
      */
     public function logger()
     {
         if (!$this->logger) {
-            $dir = $this->app->path('log_root_dir') . 'menus/' . date('Y-m-d');
+            $dir = $this->app->path('log_root_dir').'menus/'.date('Y-m-d');
             $dir = Os::toPathStyle($dir);
 
             $exploded = explode($this->menuNamespaceDelimiter(), $this->name);
 
             $menuName = Str::pascalCase(array_pop($exploded));
             $menuRelativePath = $exploded ? join(Os::slash(), $exploded) : '';
-            $dir = !$menuRelativePath ?: $dir . '/' . $menuRelativePath;
+            $dir = !$menuRelativePath ?: $dir.'/'.$menuRelativePath;
 
             if (!is_dir($dir)) {
                 mkdir($dir, 0777, true);
             }
 
-            $file = $dir . '/' . $menuName . '.log';
-            $cache = $dir . '/.count';
+            $file = $dir.'/'.$menuName.'.log';
+            $cache = $dir.'/.count';
             $this->logger = new Log($file, $cache);
         }
 
@@ -231,7 +239,7 @@ class BaseMenu/* implements \ArrayAccess */
     }
 
     /**
-     * The name of this menu
+     * The name of this menu.
      *
      * @return string
      */
@@ -241,7 +249,7 @@ class BaseMenu/* implements \ArrayAccess */
     }
 
     /**
-     * The name of this menu
+     * The name of this menu.
      *
      * @return string
      */
@@ -251,10 +259,11 @@ class BaseMenu/* implements \ArrayAccess */
     }
 
     /**
-     * Merge an action array with an actionBag
+     * Merge an action array with an actionBag.
      *
      * @param array $actionBag
      * @param array $mergeWith
+     *
      * @return array
      */
     public function mergeAction($actionBag, $mergeWith)
@@ -263,7 +272,7 @@ class BaseMenu/* implements \ArrayAccess */
     }
 
     /**
-     * Add a `go to main menu` action into the actions
+     * Add a `go to main menu` action into the actions.
      *
      * If no trigger is passed, it will use the configured trigger
      * (in config/menu.php file)
@@ -271,6 +280,7 @@ class BaseMenu/* implements \ArrayAccess */
      *
      * @param string $option
      * @param string $display
+     *
      * @return array The modified action bag
      */
     public function insertMainMenuAction($option = '', $display = '')
@@ -279,7 +289,7 @@ class BaseMenu/* implements \ArrayAccess */
     }
 
     /**
-     * Return a `go to main menu` action bag
+     * Return a `go to main menu` action bag.
      *
      * If no trigger is passed, it will use the configured trigger
      * (in config/menu.php file)
@@ -287,6 +297,7 @@ class BaseMenu/* implements \ArrayAccess */
      *
      * @param string $trigger
      * @param string $display
+     *
      * @return array
      */
     public function mainMenuAction($trigger = '', $display = '')
@@ -296,14 +307,14 @@ class BaseMenu/* implements \ArrayAccess */
 
         return [
             $trigger => [
-                ITEM_MSG => $display,
+                ITEM_MSG    => $display,
                 ITEM_ACTION => APP_WELCOME,
             ],
         ];
     }
 
     /**
-     * Insert a `go to previous menu` action into the actions
+     * Insert a `go to previous menu` action into the actions.
      *
      * If no trigger is passed, it will use the configured trigger
      * (in config/menu.php file)
@@ -311,6 +322,7 @@ class BaseMenu/* implements \ArrayAccess */
      *
      * @param string $trigger
      * @param string $display
+     *
      * @return array The modified action bag
      */
     public function insertBackAction($trigger = '', $display = '')
@@ -319,7 +331,7 @@ class BaseMenu/* implements \ArrayAccess */
     }
 
     /**
-     * Return an action bag containing a `go to previous menu` option, as an array
+     * Return an action bag containing a `go to previous menu` option, as an array.
      *
      * If no trigger is passed, it will use the configured trigger
      * (in config/menu.php file)
@@ -327,6 +339,7 @@ class BaseMenu/* implements \ArrayAccess */
      *
      * @param string $trigger
      * @param string $display
+     *
      * @return array
      */
     public function backAction($trigger = '', $display = '')
@@ -337,14 +350,14 @@ class BaseMenu/* implements \ArrayAccess */
 
         return [
             $trigger => [
-                ITEM_MSG => $display,
+                ITEM_MSG    => $display,
                 ITEM_ACTION => APP_BACK,
             ],
         ];
     }
 
     /**
-     * Insert a `paginate back` action into the actions
+     * Insert a `paginate back` action into the actions.
      *
      * If no trigger is passed, it will use the configured trigger
      * (in config/menu.php file)
@@ -352,6 +365,7 @@ class BaseMenu/* implements \ArrayAccess */
      *
      * @param string $trigger
      * @param string $display
+     *
      * @return array The modified action bag
      */
     public function insertPaginateBackAction($trigger = '', $display = '')
@@ -360,7 +374,7 @@ class BaseMenu/* implements \ArrayAccess */
     }
 
     /**
-     * Return a `paginate back` action, as an array
+     * Return a `paginate back` action, as an array.
      *
      * If no trigger is passed, it will use the configured trigger
      * (in config/menu.php file)
@@ -368,6 +382,7 @@ class BaseMenu/* implements \ArrayAccess */
      *
      * @param string $trigger
      * @param string $display
+     *
      * @return array
      */
     public function paginateBackAction($trigger = '', $display = '')
@@ -378,14 +393,14 @@ class BaseMenu/* implements \ArrayAccess */
 
         return [
             $trigger => [
-                ITEM_MSG => $display,
+                ITEM_MSG    => $display,
                 ITEM_ACTION => APP_PAGINATE_BACK,
             ],
         ];
     }
 
     /**
-     * Insert a `paginate forward` action into the actions
+     * Insert a `paginate forward` action into the actions.
      *
      * If no trigger is passed, it will use the configured trigger
      * (in config/menu.php file)
@@ -393,6 +408,7 @@ class BaseMenu/* implements \ArrayAccess */
      *
      * @param string $trigger
      * @param string $display
+     *
      * @return array The modified action bag
      */
     public function insertPaginateForwardAction($trigger = '', $display = '')
@@ -401,7 +417,7 @@ class BaseMenu/* implements \ArrayAccess */
     }
 
     /**
-     * Return a `paginate forward` action
+     * Return a `paginate forward` action.
      *
      * If no trigger is passed, it will use the configured trigger
      * (in config/menu.php file)
@@ -409,6 +425,7 @@ class BaseMenu/* implements \ArrayAccess */
      *
      * @param string $trigger
      * @param string $display
+     *
      * @return array
      */
     public function paginateForwardAction($trigger = '', $display = '')
@@ -418,14 +435,14 @@ class BaseMenu/* implements \ArrayAccess */
 
         return [
             $trigger => [
-                ITEM_MSG => $display,
+                ITEM_MSG    => $display,
                 ITEM_ACTION => APP_PAGINATE_FORWARD,
             ],
         ];
     }
 
     /**
-     * Insert a `end USSD` action into the actions
+     * Insert a `end USSD` action into the actions.
      *
      * If no trigger is passed, it will use the configured trigger
      * (in config/menu.php file)
@@ -433,6 +450,7 @@ class BaseMenu/* implements \ArrayAccess */
      *
      * @param string $trigger
      * @param string $display
+     *
      * @return array The modified action bag
      */
     public function insertEndAction($trigger = '', $display = '')
@@ -441,7 +459,7 @@ class BaseMenu/* implements \ArrayAccess */
     }
 
     /**
-     * Return a `end USSD` action
+     * Return a `end USSD` action.
      *
      * If no trigger is passed, it will use the configured trigger
      * (in config/menu.php file)
@@ -449,6 +467,7 @@ class BaseMenu/* implements \ArrayAccess */
      *
      * @param string $trigger
      * @param string $display
+     *
      * @return array
      */
     public function endAction($trigger = '', $display = '')
@@ -458,16 +477,17 @@ class BaseMenu/* implements \ArrayAccess */
 
         return [
             $trigger => [
-                ITEM_MSG => $display,
+                ITEM_MSG    => $display,
                 ITEM_ACTION => APP_END,
             ],
         ];
     }
 
     /**
-     * Return an action bag after adding the back action to it
+     * Return an action bag after adding the back action to it.
      *
      * @param array $actionBag
+     *
      * @return array
      */
     public function withBack($actionBag = [])
@@ -476,7 +496,7 @@ class BaseMenu/* implements \ArrayAccess */
     }
 
     /**
-     * Defines the option the user will select to move back
+     * Defines the option the user will select to move back.
      *
      * @return string
      */
@@ -486,35 +506,39 @@ class BaseMenu/* implements \ArrayAccess */
     }
 
     /**
-     * Set the error to be displayed on the user's screen
+     * Set the error to be displayed on the user's screen.
      *
      * The error will overwrite any previously defined error (either by the framework or by the developer)
      *
      * @param string $error
+     *
      * @return void
      */
     public function setError($error = '')
     {
         $error .= $this->app->error() ? "\n" : '';
         $this->app->setError($error);
+
         return $this;
     }
 
     /**
-     * Add an error message to error stack, to be displayed on the user's screen
+     * Add an error message to error stack, to be displayed on the user's screen.
      *
      * @param string $error
+     *
      * @return void
      */
     public function addError($error = '')
     {
-        $error = trim($this->app->error() . "\n" . $error);
+        $error = trim($this->app->error()."\n".$error);
         $this->app->setError($error);
+
         return $this;
     }
 
     /**
-     * Send SMS to a number
+     * Send SMS to a number.
      *
      * If no phone number  (`$tel`) has been passed, the SMS will be sent to the current user (`$this->tel()`)
      *
@@ -522,10 +546,11 @@ class BaseMenu/* implements \ArrayAccess */
      *
      * If no `endpoint` has been passed, the method will try to use any configured SMS_ENDPOINT variable in the env file or the equivalent parameter in the config/app.php file (`sms_endpoint`). If this parameter is not found, the sms will just be discarded.
      *
-     * @param string $sms The text to send
-     * @param string $tel The phone number to send the SMS to.
+     * @param string $sms        The text to send
+     * @param string $tel        The phone number to send the SMS to.
      * @param string $senderName The name that will appear as the one who sent the SMS
-     * @param string $endpoint The endpoint to send the SMS to.
+     * @param string $endpoint   The endpoint to send the SMS to.
+     *
      * @return void
      */
     public function sendSms($sms, $tel = '', $senderName = '', $endpoint = '')
@@ -534,12 +559,13 @@ class BaseMenu/* implements \ArrayAccess */
     }
 
     /**
-     * Send SMS and exit the script
+     * Send SMS and exit the script.
      *
      * @param string $sms
      * @param string $tel
      * @param string $sender
      * @param string $url
+     *
      * @return void
      */
     public function sendSmsAndExit($sms, $tel = '', $sender = '', $url = '')
@@ -551,13 +577,15 @@ class BaseMenu/* implements \ArrayAccess */
     public function setApp(Kernel $app)
     {
         $this->app = $app;
+
         return $this;
     }
 
     /**
-     * Delete all the actions of a particular menu page ($menuName)
+     * Delete all the actions of a particular menu page ($menuName).
      *
      * @param string $menuName
+     *
      * @return void
      */
     public function emptyMenuActions($menuName = '')
@@ -567,12 +595,13 @@ class BaseMenu/* implements \ArrayAccess */
     }
 
     /**
-     * Initialise or re-initialise the menu actions to the $actions passed as argument
+     * Initialise or re-initialise the menu actions to the $actions passed as argument.
      *
      * If no menu name is passed, the current menu name is used.
      *
-     * @param array $actions
+     * @param array  $actions
      * @param string $menuName
+     *
      * @return void
      */
     public function setMenuActions($actions, $menuName = '')
@@ -641,10 +670,10 @@ class BaseMenu/* implements \ArrayAccess */
     }
 
     /**
-     * Return the user previous responses
+     * Return the user previous responses.
      *
      * @param string $menuName The name of the menu response to retrieve
-     * @param string $default The default to pass when no response has been found for the menu provided
+     * @param string $default  The default to pass when no response has been found for the menu provided
      *
      * @return UserResponse|mixed
      */
@@ -660,21 +689,24 @@ class BaseMenu/* implements \ArrayAccess */
      * in the actionBag. If the parameter replace is true, the old actions will
      * be rather completely replaced by the new actionBag.
      *
-     * @param array $actionBag
-     * @param boolean $replace
+     * @param array  $actionBag
+     * @param bool   $replace
      * @param string $menuName
+     *
      * @return array The modified action bag
      */
     public function insertMenuActions($actionBag, $replace = false, $menuName = '')
     {
         $menuName = $menuName ?: $this->menuName();
+
         return $this->app->insertMenuActions($actionBag, $replace, $menuName);
     }
 
     /**
-     * Empty, for this request, the actionBag of a particular menu
+     * Empty, for this request, the actionBag of a particular menu.
      *
      * @param string $menuName
+     *
      * @return void
      */
     public function emptyActionsOfMenu($menuName)
@@ -684,7 +716,7 @@ class BaseMenu/* implements \ArrayAccess */
 
     /**
      * Returns the next menu name or null if it has not yet been retieved by
-     * the framework
+     * the framework.
      *
      * The next menu name is retrieved from the menu flow in the menus.php file,
      * the actions or the default next menu parameter and is defined only when
@@ -705,10 +737,11 @@ class BaseMenu/* implements \ArrayAccess */
     }
 
     /**
-     * Returns the previous menu name
+     * Returns the previous menu name.
+     *
+     * @throws \RuntimeException If nothing is in the history
      *
      * @return string
-     * @throws \RuntimeException If nothing is in the history
      */
     public function previousMenuName()
     {
@@ -722,10 +755,11 @@ class BaseMenu/* implements \ArrayAccess */
     }
 
     /**
-     * Allows developer to save a value in the session
+     * Allows developer to save a value in the session.
      *
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
+     *
      * @return void
      */
     public function sessionSave($name, $value)
@@ -741,10 +775,11 @@ class BaseMenu/* implements \ArrayAccess */
      * passed, it throws an exception.
      *
      * @param string $name
-     * @param mixed $default
-     * @return mixed
+     * @param mixed  $default
      *
      * @throws \RuntimeException
+     *
+     * @return mixed
      */
     public function sessionGet($name, $default = null)
     {
@@ -755,7 +790,8 @@ class BaseMenu/* implements \ArrayAccess */
      * Allow developer to check if the session contains an index.
      *
      * @param string $name
-     * @return boolean
+     *
+     * @return bool
      */
     public function sessionHas($name)
     {
@@ -763,9 +799,10 @@ class BaseMenu/* implements \ArrayAccess */
     }
 
     /**
-     * Allow the developer to remove a key from the session
+     * Allow the developer to remove a key from the session.
      *
      * @param string $name
+     *
      * @return void
      */
     public function sessionRemove($name)
@@ -775,13 +812,14 @@ class BaseMenu/* implements \ArrayAccess */
 
     /**
      * Allow the developer to retrieve a value from the session.
-     * This is identical to `sessionGet`
+     * This is identical to `sessionGet`.
      *
      * @param string $key
-     * @param mixed $default
-     * @return mixed
+     * @param mixed  $default
      *
      * @throws \RuntimeException If $key not found and no $default passed.
+     *
+     * @return mixed
      */
     public function session($key = null, $default = null)
     {
@@ -789,7 +827,7 @@ class BaseMenu/* implements \ArrayAccess */
     }
 
     /**
-     * Returns the menu history bag
+     * Returns the menu history bag.
      *
      * @return array
      */
@@ -809,7 +847,7 @@ class BaseMenu/* implements \ArrayAccess */
             return call_user_func([$this->app, $method], ...$args);
         }
 
-        throw new \BadMethodCallException('Undefined method `' . $method . '` in class ' . get_class($this));
+        throw new \BadMethodCallException('Undefined method `'.$method.'` in class '.get_class($this));
     }
 
     // ArrayAccess Interface

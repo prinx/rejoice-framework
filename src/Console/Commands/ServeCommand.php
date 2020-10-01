@@ -1,4 +1,5 @@
 <?php
+
 namespace Prinx\Rejoice\Console\Commands;
 
 use Symfony\Component\Console\Input\InputInterface;
@@ -7,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * This command is not used
- * To be reviewed
+ * To be reviewed.
  */
 class ServeCommand extends FrameworkCommand
 {
@@ -27,18 +28,19 @@ class ServeCommand extends FrameworkCommand
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $simulatorPath = realpath(__DIR__ . '/../../../../../');
+        $simulatorPath = realpath(__DIR__.'/../../../../../');
         if (!is_dir($simulatorPath)) {
             $output->writeln([
                 '<fg=red>index.php not found.</>',
             ]);
+
             return SmileCommand::FAILURE;
         }
 
         $ip = '127.0.0.1';
         $port = $input->getOption('port');
         // if ($this->portAvailabe($port, $ip)) {
-        passthru('php -S ' . $ip . ':' . $port . ' -t "' . $simulatorPath . '"', $return);
+        passthru('php -S '.$ip.':'.$port.' -t "'.$simulatorPath.'"', $return);
 
         // $output->writeln([
         //     '<info>Server started at http://' . $ip . ':' . $port . '</info>',
@@ -62,6 +64,7 @@ class ServeCommand extends FrameworkCommand
         $connection = fsockopen($ip, $port);
         if (is_resource($connection)) {
             fclose($connection);
+
             return true;
         }
 

@@ -11,10 +11,8 @@
 
 namespace Prinx\Rejoice\Foundation;
 
-use Prinx\Rejoice\Foundation\Kernel;
-
 /**
- * Handles the response to send back to the user
+ * Handles the response to send back to the user.
  *
  * @author Prince Dorcis <princedorcis@gmail.com>
  */
@@ -48,15 +46,15 @@ class Response
         $ussdServiceOpParam = $this->app->config('app.request_param_request_type');
         $sessionIDParam = $this->app->config('app.request_param_session_id');
 
-        $fields = array(
-            $messageParam => trim($message),
+        $fields = [
+            $messageParam       => trim($message),
             $ussdServiceOpParam => $requestType,
-            $sessionIDParam => $this->app->sessionId(),
-        );
+            $sessionIDParam     => $this->app->sessionId(),
+        ];
 
         foreach ($this->simulatorMetadata as $metadata) {
-            if ($this->{$metadata . 'InSimulator'}) {
-                $fields[$metadata] = $this->{$metadata . 'InSimulator'};
+            if ($this->{$metadata.'InSimulator'}) {
+                $fields[$metadata] = $this->{$metadata.'InSimulator'};
             }
         }
 
@@ -73,7 +71,7 @@ class Response
 
         // Something has been echoed in the code but it is not an error
         if ($error && $previouslyDisplayed) {
-            $this->addInfoInSimulator("\n" . $previouslyDisplayed . "\n");
+            $this->addInfoInSimulator("\n".$previouslyDisplayed."\n");
         } elseif ($error) {
             $appFailMessage = $this->app->config('menu.application_failed_message');
 
@@ -98,7 +96,7 @@ class Response
             echo $response;
 
             header('Content-Encoding: none');
-            header('Content-Length: ' . ob_get_length());
+            header('Content-Length: '.ob_get_length());
             header('Connection: close');
 
             ob_end_flush();
@@ -141,7 +139,8 @@ class Response
          * the remote ussd side and not at this ussd switch side.
          */
         if (!is_array($response)) {
-            echo "ERROR OCCURED AT THE REMOTE USSD SIDE:  " . $resJSON;
+            echo 'ERROR OCCURED AT THE REMOTE USSD SIDE:  '.$resJSON;
+
             return;
         }
 
@@ -150,15 +149,15 @@ class Response
 
     public function setInSimulator(array $data, string $type)
     {
-        $this->{$type . 'InSimulator'} = $data;
+        $this->{$type.'InSimulator'} = $data;
     }
 
     public function addInSimulator($data, string $type)
     {
         if (is_array($data)) {
-            array_merge($this->{$type . 'InSimulator'}, $data);
+            array_merge($this->{$type.'InSimulator'}, $data);
         } else {
-            array_push($this->{$type . 'InSimulator'}, $data);
+            array_push($this->{$type.'InSimulator'}, $data);
         }
     }
 

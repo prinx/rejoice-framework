@@ -11,11 +11,10 @@
 namespace Prinx\Rejoice\Foundation;
 
 /**
- * Create an instance instance of the application
+ * Create an instance instance of the application.
  *
  * @author Prince Dorcis <princedorcis@gmail.com>
  */
-
 class App
 {
     public static function run($appName = '')

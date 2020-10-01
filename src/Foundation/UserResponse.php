@@ -12,7 +12,7 @@
 namespace Prinx\Rejoice\Foundation;
 
 /**
- * Implements methods to easily access all the user's responses
+ * Implements methods to easily access all the user's responses.
  *
  * @author Prince Dorcis <princedorcis@gmail.com>
  */
@@ -30,7 +30,7 @@ class UserResponse implements \ArrayAccess
                 return null;
             }
 
-            throw new \Exception('No user response associated to the menu "' . $menuName . '"');
+            throw new \Exception('No user response associated to the menu "'.$menuName.'"');
         }
 
         $len = count($this->responses[$menuName]);
@@ -41,7 +41,7 @@ class UserResponse implements \ArrayAccess
                 return null;
             }
 
-            throw new \Exception('No user response at the index ' . $index);
+            throw new \Exception('No user response at the index '.$index);
         }
 
         return $this->responses[$menuName][$index];
@@ -50,7 +50,7 @@ class UserResponse implements \ArrayAccess
     public function getAll($menuName)
     {
         if (!isset($this->responses[$menuName])) {
-            throw new \Exception('No user response for the menu ' . $menuName);
+            throw new \Exception('No user response for the menu '.$menuName);
         }
 
         return $this->responses[$menuName];

@@ -2,7 +2,6 @@
 
 namespace Prinx\Rejoice\Console;
 
-use Prinx\Rejoice\Console\TableDivider;
 use Symfony\Component\Console\Helper\Table as ConsoleTable;
 
 class Table extends ConsoleTable

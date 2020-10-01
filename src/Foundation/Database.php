@@ -14,18 +14,18 @@ namespace Prinx\Rejoice\Foundation;
 use Prinx\Utils\DB;
 
 /**
- * Connect to and provide the connections to the databases
+ * Connect to and provide the connections to the databases.
  *
  * @author Prince Dorcis <princedorcis@gmail.com>
  */
 class Database
 {
     protected static $defaultDbParams = [
-        'driver' => 'mysql',
-        'host' => 'localhost',
-        'port' => '3306',
-        'dbname' => '',
-        'user' => 'root',
+        'driver'   => 'mysql',
+        'host'     => 'localhost',
+        'port'     => '3306',
+        'dbname'   => '',
+        'user'     => 'root',
         'password' => '',
     ];
 

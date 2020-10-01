@@ -74,18 +74,18 @@ if ($validate) {
 }
 
 if ($saveAs) {
-    $template .= "
+    $template .= '
 
     /**
      * Modify the response of the user before it is saved to previous responses
      *
-     * @param string \$response
+     * @param string $response
      * @return mixed
      */
-    public function saveAs(\$response)
+    public function saveAs($response)
     {
-        return \$response;
-    }";
+        return $response;
+    }';
 }
 
 if ($after) {
@@ -138,7 +138,7 @@ if ($onBack) {
     }";
 }
 
-$template .= "
-}";
+$template .= '
+}';
 
 return $template;
