@@ -38,5 +38,6 @@
     "psr-4": {
       "Prinx\\Rejoice\\": "src/"
     }
-  }
+  },
+  "abandoned": true
 }
